@@ -50,5 +50,5 @@ Whew... sure seems like a lot to ask for these days. Except, not really. The tec
 
 _Instructions for installation and setup will go here_
 
-
+To run this application, execute `./start.sh` in a bash terminal.
 
