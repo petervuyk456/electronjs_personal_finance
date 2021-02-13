@@ -1,21 +1,45 @@
 {
   "compilerOptions": {
+    // Allow js files
     "allowJs": true,
-    "module": "ES6",
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "noImplicitAny": true,
-    "sourceMap": true,
+    // base directory for non-relative module imports
     "baseUrl": ".",
-    "outDir": "dist",
+    // error check js files
+    "checkJs": true,
+    // Allow default imports from non-ES modules
+    "esModuleInterop": true,
+    // Compile Jsx to react code (React.createElement calls)
+    // Use "preserve" if we want to add a separate jsx compiler
+    "jsx": "react",
+    // Use node style resolution for node_module imports
     "moduleResolution": "node",
-    "resolveJsonModule": true,
+    // Output directory for compiled js
+    "outDir": "dist",
+    // Mappings to modules from the base url
     "paths": {
-      "*": ["node_modules/*"]
+      "*": [
+        "node_modules/*"
+      ]
     },
-    "jsx": "react"
+    // Remove comments from compiled js
+    "removeComments": true,
+    // Allow .json modules
+    "resolveJsonModule": true,
+    // Map compiled JS to TS for TS debugging
+    "sourceMap": true,
+    // Enable all strict type checking settings ,including:
+    //  - noImplicitAny
+    //  - noImplicitThis
+    //  - alwaysStrict
+    //  - strictBindCallApply
+    //  - strictNullChecks
+    //  - strictFunctionTypes
+    //  - strictPropertyInitialization
+    "strict": true,
+    // Target latest supported version of ECMAScript
+    "target": "esnext"
   },
   "include": [
     "src/**/*"
-  ]
+  ],
 }

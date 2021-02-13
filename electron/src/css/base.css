@@ -1,0 +1,31 @@
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background: white;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.fade-in {
+  animation: fadein 0.5s;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}

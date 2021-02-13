@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { HashRouter, Route } from 'react-router-dom';
+import Welcome from './WelcomePage/Welcome';
 
 const Home = () => {
-    return (
-        <h1>Home Page</h1>
-    )
+    return <Welcome/>
 }
 
 const FirstPage = () => {
@@ -19,14 +18,12 @@ const SecondPage = () => {
     )
 }
 
-export default function App() : React.ReactNode {
+export default function AppRouter() : JSX.Element {
     return (
         <HashRouter>
-        <div>
             <Route path="/" exact     component={ Home } />
             <Route path="/firstPage"  component={ FirstPage } />
             <Route path="/secondPage" component={ SecondPage } />
-        </div>
         </HashRouter>
     )
 }

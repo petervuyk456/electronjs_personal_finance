@@ -4,7 +4,7 @@ module.exports = [
     test: /\.node$/,
     use: 'node-loader',
   },
-  {
+  { // load js files
     test: /\.(m?js|node)$/,
     parser: { amd: false },
     use: {
@@ -14,7 +14,7 @@ module.exports = [
       },
     },
   },
-  {
+  { // load ts/tsx files
     test: /\.tsx?$/,
     exclude: /(node_modules|\.webpack)/,
     use: {

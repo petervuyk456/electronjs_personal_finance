@@ -1,0 +1,29 @@
+File structure
+
+Files:
+    mainConfig                   | Electron App configuration
+    package.json                 | Node configuration and dependency list
+    tsconfig.json                | Typescript configuration
+    webpack.main.config.js       | Webpack configuration for the main process
+    webpack.plugins.js           | List of webpack plugins
+    webpack.renderer.config.js   | Webpack Configuration for the renderer process
+    webpack.rules.js             | Webpack shared rules/loader configuration
+
+Folders:
+    .webpack    | compiled code
+    src         | source code 
+        Files:
+            index.html  | initially loaded webpage
+            main.ts     | main process entry point
+            renderer.ts | renderer process entry point
+
+        Folders:
+            assets      | web assets
+            css         | css files
+            main        | TS code for the main process
+            renderer    | TS code for the renderer process
+            shared      | TS code used by both the main and renderer processes
+        
+
+
+

@@ -1,0 +1,44 @@
+.welcome {
+  background-image: url("../assets/images/Welcome.jpg");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-msg {
+  animation: fadein 2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100px;
+  width: 70%;
+  background: rgb(240, 240, 240);
+  border-radius: 5px;
+  flex-direction: column;
+}
+
+.welcome-msg .text {
+  width: 70%;
+}
+
+.loader {
+  border: 2px solid #000000;
+  border-top: 2px solid #20a6ff;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  animation: spin 0.85s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

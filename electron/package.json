@@ -1,12 +1,11 @@
 {
-  "name": "electron",
-  "productName": "electron",
+  "name": "falcon-finance",
+  "productName": "Falcon's Crest Personal Finance",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Giving you a birds-eye view of your financial well-being, along with the knowledge and tools needed to take the wheel and direct your own path to financial freedom",
   "main": ".webpack/main",
-  "typings": "src",
   "scripts": {
-    "start": "electron-forge start",
+    "start": "electron-forge start -- --dev",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
@@ -63,6 +62,13 @@
       ]
     }
   },
+  "dependencies": {
+    "electron-log": "^4.3.1",
+    "electron-squirrel-startup": "^1.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0"
+  },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.54",
     "@electron-forge/maker-deb": "^6.0.0-beta.54",
@@ -86,12 +92,7 @@
     "node-loader": "^1.0.1",
     "style-loader": "^1.2.1",
     "ts-loader": "^8.0.2",
-    "typescript": "^4.0.2"
-  },
-  "dependencies": {
-    "electron-squirrel-startup": "^1.0.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0"
+    "typescript": "^4.0.2",
+    "url-loader": "^4.1.1"
   }
 }

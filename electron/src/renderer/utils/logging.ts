@@ -1,0 +1,1 @@
+// TODO: Setup logging from renderer to main console using ipc
