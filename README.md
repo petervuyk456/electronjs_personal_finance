@@ -51,3 +51,44 @@ _Instructions for installation and setup will go here_
 
 To run this application, execute `./start.sh` in a bash terminal.
 
+## Frontend APIs
+
+* 
+* 
+* 
+
+## Backend APIs
+
+### Session Endpoints  
+* login, logout, isLogin, etc.
+* manage data security
+
+__all the below support iterable inputs__  
+### Account Management Endpoints  
+* CRUD **Account** Class
+* manage multiple users
+### Portfolio Endpoints
+* CRUD **Portfolio** Class
+* manage portfolio of all assets, liabilities, incomes, and expenses
+### Real Estate Endpoints
+* CRUD **Property** Class
+* manage real estate watching and ownership/renting
+### Rental Endpoints
+* CRUD **Renter** Class
+* renter screening
+### Stock Info Endpoints
+* CRUD **Holding** Class - data by ticker and industry 
+### Orders Endpoints
+* CRUD **Order** Class - buy/sell, delete, read
+### Market Indicator Endpoints
+* getIndicator, getCommonIndicators
+### Scheduler Endpoints
+* scheduleTask, getSchedule
+### Analysis Endpoints
+#### Investment Analysis
+* retirementSummary
+#### Ticker/Industry Analysis
+* getTickerValue, getIndustryValue, predictTickerGrowth, predictIndustryGrowth
+#### Real Estate Analysis
+* valueProperty, locationAssessment
+
