@@ -2,6 +2,9 @@ import * as React from 'react';
 import { HashRouter, Route } from 'react-router-dom';
 import Welcome from './WelcomePage/Welcome';
 
+/**
+ * Render the Homepage
+ */
 const Home = () => {
     return <Welcome/>
 }
@@ -18,6 +21,9 @@ const SecondPage = () => {
     )
 }
 
+/**
+ * Build the main router
+ */
 export default function AppRouter() : JSX.Element {
     return (
         <HashRouter>

@@ -16,6 +16,11 @@
     "name": "Peter Vuyk",
     "email": "peter.vuyk456@gmail.com"
   },
+  "contributors": [
+    {
+      "name": "Chris Raitano"
+    }
+  ],
   "license": "MIT",
   "config": {
     "forge": {

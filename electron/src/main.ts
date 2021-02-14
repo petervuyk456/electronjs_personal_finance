@@ -1,22 +1,20 @@
-import path from 'path'
-import fs from 'fs'
 import { app, BrowserWindow, Menu } from 'electron'
-import { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+import { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer'
 import log from './main/utils/logging'
 import * as setupUtils from './main/setup/utils'
 
-declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
+declare const MAIN_WINDOW_WEBPACK_ENTRY: any
 
 // initialize on load
 initialize()
 
 /**
  * Perform app initialization
- */ 
+ */
 function initialize(): void {
   // First, make sure everything is up to date
   update()
-  
+
   // Get some config info
   const initSettings = setupUtils.processCmdArgs()
   const platform = setupUtils.getPlatform()
@@ -24,11 +22,11 @@ function initialize(): void {
 
   // Development mode only setup
   if (initSettings.isDev) {
-    setDevToolsDefaultWidth(devToolsWidth)
+    setupUtils.setDevToolsDefaultWidth(devToolsWidth)
   }
 
   // Add lifecycle events
-  setupAppEventHandlers(platform, initSettings.isDev, devToolsWidth)
+  setupAppEventHandlers({ platform, isDev: initSettings.isDev, devToolsWidth })
 }
 
 /**
@@ -37,31 +35,9 @@ function initialize(): void {
 function update(): void {
   if (require('electron-squirrel-startup')) {
     log.error('Updates failed')
-    app.quit();
+    app.quit()
   }
   log.success('Updated successfully')
-}
-
-/**
- * Set default dev tools size in user preferences so app window size exactly matches what we'd see in production
- * @param width Default width for our chrome devtools
- */
-function setDevToolsDefaultWidth(width: number): void {
-  const userDataPath = app.getPath("userData");
-  const prefPath = path.join(userDataPath, "Preferences");
-  const prefs = JSON.parse(fs.readFileSync(prefPath, "utf-8"));
-  prefs.electron.devtools = {
-    ...(prefs.electron.devtools || {}),
-    preferences: {
-      ...((prefs.electron.devtools || {}).preferences || {}),
-      "InspectorView.splitViewState": JSON.stringify({
-        // Seems like vertical and horizontal size are switched
-        // This should set the width
-        vertical: { size: width },
-      })
-    },
-  };
-  fs.writeFileSync(prefPath, JSON.stringify(prefs));
 }
 
 /**
@@ -69,54 +45,86 @@ function setDevToolsDefaultWidth(width: number): void {
  * @param isDev Flag to indicate whether we're in development mode
  * @param devToolsWidth Width to use for the chrome dev tools
  */
-function createMainWindow(isDev: boolean, devToolsWidth: number): BrowserWindow {
-  return setupUtils.createWindow(MAIN_WINDOW_WEBPACK_ENTRY, undefined , isDev, devToolsWidth)
+function createMainWindow(
+  isDev: boolean,
+  devToolsWidth: number
+): BrowserWindow {
+  return setupUtils.createWindow(
+    MAIN_WINDOW_WEBPACK_ENTRY,
+    undefined,
+    isDev,
+    devToolsWidth
+  )
 }
 
 /**
  * Create handlers for app lifetime eventss
- * @param platform Which system platform we're running
- * @param [isDev] Flag to indicate whether we're in development mode
- * @param [devToolsWidth] Width to use for the chrome dev tools
+ * @param args Lifecycle event initialization parameters
  */
-function setupAppEventHandlers(platform: setupUtils.platform, isDev: boolean = false, devToolsWidth: number = 0) {
+function setupAppEventHandlers(args: ILifecycleArgs) {
   // Fires once when electron finishes initializing
-  app.on('ready', () => {
-    log.info('App ready')
-    // Open main window
-    createMainWindow(isDev, devToolsWidth)
-  
-    // Create toolbar menu
-    const mainMenu = Menu.buildFromTemplate(setupUtils.buildMenuConfig(platform, isDev))
-    Menu.setApplicationMenu(mainMenu)
+  app.on('ready', () => onReady(args))
 
-    // Install developer extensions
-    if (isDev) {
-      setupUtils.installDevTool(REACT_DEVELOPER_TOOLS)
-    }
-  });
-  
   // Fires when all windows have been closed
-  app.on('window-all-closed', () => {
-    log.info('All windows closed')
+  app.on('window-all-closed', () => onAllWindowsClosed(args))
 
-    // Standard mac behavior is to NOT quit application when the window closes. 
-    // Other platforms should close by default
-    if (platform !== setupUtils.platform.mac) {
-      app.quit();
-    }
-  });
-  
   // Fires when the app is activated (initial launch, relaunch, clicking taskbar icon, etc.)
-  app.on('activate', () => {
-    log.info('App activated')
-
-    // Ensure we have a window open
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createMainWindow(isDev, devToolsWidth);
-    }
-  });
+  app.on('activate', () => onActivate(args))
 }
 
+//#region Lifecycle Handlers
 
+interface ILifecycleArgs {
+  platform: setupUtils.platform
+  isDev: boolean
+  devToolsWidth: number
+}
 
+/**
+ * Perform initialization actions on app ready
+ * @param args Lifecycle event initialization parameters
+ */
+const onReady = (args: ILifecycleArgs) => {
+  log.info('App ready')
+  // Open main window
+  createMainWindow(args.isDev, args.devToolsWidth)
+
+  // Create toolbar menu
+  const mainMenu = Menu.buildFromTemplate(
+    setupUtils.buildMenuConfig(args.platform, args.isDev)
+  )
+  Menu.setApplicationMenu(mainMenu)
+
+  // Install developer extensions
+  if (args.isDev) {
+    setupUtils.installChromiumExt(REACT_DEVELOPER_TOOLS)
+  }
+}
+
+/**
+ * Perform cleanup when all windows are closed
+ * @param args Lifecycle event initialization parameters
+ */
+const onAllWindowsClosed = (args: ILifecycleArgs) => {
+  log.info('All windows closed')
+
+  // Standard mac behavior is to NOT quit application when the window closes.
+  // Other platforms should close by default
+  if (args.platform !== setupUtils.platform.mac) {
+    app.quit()
+  }
+}
+
+/**
+ * Make sure we have an open widow when app is activated
+ * @param args Lifecycle event initialization parameters
+ */
+const onActivate = (args: ILifecycleArgs) => {
+  log.info('App activated')
+
+  // Ensure we have a window open
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createMainWindow(args.isDev, args.devToolsWidth)
+  }
+}
+//#endregion Lifecycle Handlers
