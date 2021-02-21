@@ -1,3 +1,4 @@
+var path = require('path');
 const rules = require('./webpack.rules');
 const plugins = require('./webpack.plugins');
 
@@ -18,6 +19,14 @@ module.exports = {
   plugins: plugins,
   resolve: {
     // Allowed file extensions
-    extensions: ['.js', '.ts', '.jsx', '.tsx', '.css']
+    extensions: ['.js', '.ts', '.jsx', '.tsx', '.css'],
+    // Add import aliases. Also add these to tsconfig to  prevent linter errors
+    alias: {
+      rendererUtils: path.resolve(__dirname, 'src/renderer/utils'),
+      shared: path.resolve(__dirname, 'src/shared'),
+      sharedUtils: path.resolve(__dirname, 'src/shared/utils'),
+      css: path.resolve(__dirname, 'src/css'),
+      assets: path.resolve(__dirname, 'src/assets'),
+    },
   },
 }

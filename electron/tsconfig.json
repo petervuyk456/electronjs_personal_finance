@@ -17,9 +17,14 @@
     "outDir": "dist",
     // Mappings to modules from the base url
     "paths": {
-      "*": [
-        "node_modules/*"
-      ]
+      "*": ["node_modules/*"],
+      // Webpack alias paths
+      "rendererUtils/*": ["src/renderer/utils/*"],
+      "mainUtils/*": ["src/main/utils/*"],
+      "shared/*": ["src/shared/*"],
+      "sharedUtils/*": ["src/shared/utils/*"],
+      "css/*": ["src/css/*"],
+      "assets/*": ["src/assets/*"],
     },
     // Remove comments from compiled js
     "removeComments": true,
@@ -37,7 +42,7 @@
     //  - strictPropertyInitialization
     "strict": true,
     // Target latest supported version of ECMAScript
-    "target": "esnext"
+    "target": "es6"
   },
   "include": [
     "src/**/*"

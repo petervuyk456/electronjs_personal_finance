@@ -1,9 +1,11 @@
 import { app, BrowserWindow, Menu } from 'electron'
-import { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer'
 import log from './main/utils/logging'
 import * as setupUtils from './main/setup/utils'
+import logger from './main/utils/logging'
+import { addIpcHandlers } from './main/setup/ipc'
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any
+declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: any
 
 // initialize on load
 initialize()
@@ -27,6 +29,9 @@ function initialize(): void {
 
   // Add lifecycle events
   setupAppEventHandlers({ platform, isDev: initSettings.isDev, devToolsWidth })
+
+  // Setup ipc
+  addIpcHandlers()
 }
 
 /**
@@ -53,7 +58,8 @@ function createMainWindow(
     MAIN_WINDOW_WEBPACK_ENTRY,
     undefined,
     isDev,
-    devToolsWidth
+    devToolsWidth,
+    MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY
   )
 }
 
@@ -94,11 +100,6 @@ const onReady = (args: ILifecycleArgs) => {
     setupUtils.buildMenuConfig(args.platform, args.isDev)
   )
   Menu.setApplicationMenu(mainMenu)
-
-  // Install developer extensions
-  if (args.isDev) {
-    setupUtils.installChromiumExt(REACT_DEVELOPER_TOOLS)
-  }
 }
 
 /**

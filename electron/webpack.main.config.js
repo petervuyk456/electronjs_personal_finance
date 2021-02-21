@@ -1,14 +1,24 @@
+var path = require('path');
+
 module.exports = {
   /**
    * This is the main entry point for your application, it's the first file
    * that runs in the main process.
    */
-  entry: './src/main.ts',
+  entry: {
+      "js": './src/main.ts',
+  },
   // Put your normal webpack config below here
   module: {
     rules: require('./webpack.rules'),
   },
   resolve: {
-    extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json']
+    extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json'],
+    // Add import aliases. Also add these to tsconfig to  prevent linter errors
+    alias: {
+      mainUtils: path.resolve(__dirname, 'src/main/utils'),
+      shared: path.resolve(__dirname, 'src/shared'),
+      sharedUtils: path.resolve(__dirname, 'src/shared/utils'),
+    },
   },
 };
