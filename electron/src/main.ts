@@ -23,9 +23,9 @@ function initialize(): void {
   const devToolsWidth = initSettings.isDev ? 300 : 0
 
   // Development mode only setup
-  if (initSettings.isDev) {
-    setupUtils.setDevToolsDefaultWidth(devToolsWidth)
-  }
+  // if (initSettings.isDev) {
+  //   setupUtils.setDevToolsDefaultWidth(devToolsWidth)
+  // }
 
   // Add lifecycle events
   setupAppEventHandlers({ platform, isDev: initSettings.isDev, devToolsWidth })
