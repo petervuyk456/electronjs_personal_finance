@@ -23,9 +23,16 @@ function initialize(): void {
   const devToolsWidth = initSettings.isDev ? 300 : 0
 
   // Development mode only setup
-  // if (initSettings.isDev) {
-  //   setupUtils.setDevToolsDefaultWidth(devToolsWidth)
-  // }
+  if (initSettings.isDev) {
+    try {
+      // This can fail if we can't access the user preferences file
+      setupUtils.setDevToolsDefaultWidth(devToolsWidth)
+    } catch (err) {
+      log.warn(
+        'Unable to set dev tools width. Default content width may not match production mode.'
+      )
+    }
+  }
 
   // Add lifecycle events
   setupAppEventHandlers({ platform, isDev: initSettings.isDev, devToolsWidth })
