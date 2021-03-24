@@ -18,13 +18,18 @@
     // Mappings to modules from the base url
     "paths": {
       "*": ["node_modules/*"],
-      // Webpack alias paths
+      // Renderer
+      "assets/*": ["src/renderer/assets/*"],
+      "styles/*": ["src/renderer/styles/*"],
+      "components/*": ["src/renderer/components/*"],
+      "hooks/*": ["src/renderer/hooks/*"],
+      "renderer/*": ["src/renderer/*"],
       "rendererUtils/*": ["src/renderer/utils/*"],
+      // Main
       "mainUtils/*": ["src/main/utils/*"],
+      // Shared
       "shared/*": ["src/shared/*"],
       "sharedUtils/*": ["src/shared/utils/*"],
-      "css/*": ["src/css/*"],
-      "assets/*": ["src/assets/*"],
     },
     // Remove comments from compiled js
     "removeComments": true,

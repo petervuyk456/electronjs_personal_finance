@@ -5,4 +5,6 @@ export default interface Category {
   subCategories: Category[]
   accounts: Account[]
   parent: Category
+  dateCreated: Date
+  dateModified: Date
 }

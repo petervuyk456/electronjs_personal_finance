@@ -15,17 +15,21 @@ export enum TaxOption {
 }
 
 export default interface Account {
+  // Required fields
   name: string
   type: AccountType
-  subtype: string
-  date: Date
-  user: User
-  formula: string
-  budget: number
-  actual: number
-  difference: number
-  notes: string
   dateCreated: Date
   dateModified: Date
-  taxOption: TaxOption
+  user: User
+
+  // Optional fields
+  category?: string
+  subCategory?: string
+  formula?: string
+  budget?: number
+  actual?: number
+  difference?: number
+  notes?: string
+  taxOption?: TaxOption
+  date?: Date
 }

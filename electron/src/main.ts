@@ -24,14 +24,7 @@ function initialize(): void {
 
   // Development mode only setup
   if (initSettings.isDev) {
-    try {
-      // This can fail if we can't access the user preferences file
-      setupUtils.setDevToolsDefaultWidth(devToolsWidth)
-    } catch (err) {
-      log.warn(
-        'Unable to set dev tools width. Default content width may not match production mode.'
-      )
-    }
+    setupUtils.setDevToolsDefaultWidth(devToolsWidth)
   }
 
   // Add lifecycle events

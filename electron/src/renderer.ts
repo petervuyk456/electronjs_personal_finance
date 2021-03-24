@@ -1,4 +1,4 @@
 // Load our base css
-import './css/base.css';
+import './renderer/styles/base.css'
 // Load our react app
-import './renderer/app';
+import './renderer/app'

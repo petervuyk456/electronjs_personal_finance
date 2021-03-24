@@ -141,7 +141,14 @@ export function setDevToolsDefaultWidth(width: number): void {
       }),
     },
   }
-  fs.writeFileSync(prefPath, JSON.stringify(prefs))
+  try {
+    // This can fail if we can't access the user preferences file
+    fs.writeFileSync(prefPath, JSON.stringify(prefs))
+  } catch (err) {
+    log.warn(
+      'Unable to set dev tools width. Default content width may not match production mode.'
+    )
+  }
 }
 
 /**
