@@ -20,7 +20,6 @@
       "*": ["node_modules/*"],
       // Renderer
       "assets/*": ["src/renderer/assets/*"],
-      "styles/*": ["src/renderer/styles/*"],
       "components/*": ["src/renderer/components/*"],
       "hooks/*": ["src/renderer/hooks/*"],
       "renderer/*": ["src/renderer/*"],

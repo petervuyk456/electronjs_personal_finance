@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { useHistory } from 'react-router-dom'
+import { Button } from './Fields'
+import './forms.scss'
 
 interface IFormProps{
   onSubmit: () => void
@@ -25,12 +27,10 @@ const BasicForm: React.FC<IFormProps> = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       {props.children}
-      <button type="submit">
-        Accept
-      </button>
-      <button type="button" onClick={goBack}>
-        Cancel
-      </button>
+      <div className="buttonContainer">
+        <Button>Accept</Button>
+        <Button onClick={goBack}>Cancel</Button>
+      </div>
     </form>
   );
 }

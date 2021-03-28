@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { HashRouter, Route, RouteProps } from 'react-router-dom';
 import link from 'rendererUtils/linkPaths'
-import Home from './TestLinks/TestLinks';
+import Home from './components/TestLinks/TestLinks';
 import log from 'rendererUtils/logging'
 import AccountRouter from 'components/account/AccountRouter'
 import UserRouter from 'components/user/UserRouter'

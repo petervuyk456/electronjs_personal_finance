@@ -4,8 +4,8 @@ const plugins = require('./webpack.plugins');
 
 // The renderer can also include css and images. We don't need these for the main process
 rules.push({
-  test: /\.css$/,
-  use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+  test: /\.s?css$/,
+  use: [ 'style-loader', 'css-loader', "sass-loader", ],
 })
 rules.push({
   test: /\.(png|jpg)$/,
@@ -24,7 +24,6 @@ module.exports = {
     alias: {
       assets: path.resolve(__dirname, 'src/renderer/assets'),
       components: path.resolve(__dirname, 'src/renderer/components'),
-      styles: path.resolve(__dirname, 'src/renderer/styles'),
       hooks: path.resolve(__dirname, 'src/renderer/hooks'),
       renderer: path.resolve(__dirname, 'src/renderer'),
       rendererUtils: path.resolve(__dirname, 'src/renderer/utils'),

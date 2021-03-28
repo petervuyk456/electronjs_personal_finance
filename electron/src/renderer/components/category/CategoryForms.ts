@@ -1,6 +1,5 @@
 import model from 'shared/models/Category'
 import formBuilder from 'rendererUtils/formBuilder'
-import * as Enum from 'sharedUtils/Enum'
 import log from 'rendererUtils/logging'
 
 interface IFieldInfo {
